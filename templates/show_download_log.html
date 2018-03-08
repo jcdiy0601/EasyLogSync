@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+{% load serialize_url %}
+{% block css %}
+    <link href="/static/css/commons.css" rel="stylesheet">
+{% endblock %}
+
+{% block page-title %}
+    日志管理
+{% endblock %}
+
+{% block page-path %}
+    <li><a href="{% url 'index' %}">首页</a></li>
+    <li><a href="{% url 'show_download_log' %}">下载日志</a></li>
+{% endblock %}
+
+{% block page-content %}
+    <div class="panel">
+        <!--Panel heading-->
+        <div class="panel-heading">
+            <h3 class="panel-title">选择要下载的项目应用日志</h3>
+        </div>
+        <!--Default panel contents-->
+        <div class="panel-body">
+            <select id="app-select" class="form-control">
+                {% for item in result_list %}
+                    <option value="{{ item.name }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="button" id="choice_btn" class="btn btn-success pull-right" value="确定">
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">日志列表</h3>
+        </div>
+        <div class="panel-body">
+            <div id="task_result_container">
+
+            </div>
+            <table id="log_table" class="table table-bordered">
+                <thead>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--页码开始-->
+    <div>
+        <div style="float: right">
+            <ul id="pager" class="pagination pagination-sm no-margin">
+
+            </ul>
+        </div>
+    </div>
+    <!--页面结束-->
+{% endblock %}
+
+{% block js %}
+    <script src="/static/js/show_download_log.js"></script>
+    <script>
+        function ChangePage(pageNum) {
+            $.changePage(pageNum);
+        }
+    </script>
+{% endblock %}
